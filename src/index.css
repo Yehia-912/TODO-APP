@@ -120,7 +120,7 @@ header {
 .todo__form--button {
   border-radius: var(--main-radius);
   cursor: pointer;
-  border: 1px solid var(--neutral-900);
+  border: 1px solid ;
   padding: 5px 10px;
   background-origin: border-box;
   position: relative;

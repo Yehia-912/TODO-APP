@@ -1,6 +1,8 @@
-interface IProps {}
 
-// eslint-disable-next-line no-empty-pattern
+
+interface IProps {
+}
+//eslint-disable-next-line
 const TodoForm = ({}: IProps) => {
   return (
     <form className="todo__form">
