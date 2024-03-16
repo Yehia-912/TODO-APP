@@ -9,6 +9,7 @@ const TodoForm = ({}: IProps) => {
           type="text"
           placeholder="Create a new todo..."
           className="todo__form--input"
+          value="Currently typing..."
         />
         <button type="submit" className="todo__form--button">
           Add

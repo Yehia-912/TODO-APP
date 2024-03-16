@@ -17,11 +17,12 @@
   --fs-900: 2rem;
 
   --main-radius: 5px;
-  --main-padding: 10px 30px;
+  --main-padding: 15px 25px;
   --box-shadow: 0 0 2px rgb(0, 0, 0, 0.25);
 
-  --duration: 0.15s;
-  --transition: all var(--duration) ease-in-out;
+  --duration: 0.1s;
+  --transition: all var(--duration) linear;
+  --radius: 100vh;
 }
 *,
 *::before,
@@ -54,7 +55,7 @@ input {
 button {
   background-color: transparent;
   border: none;
-  color: var(--neutral-700);
+  color: var(--neutral-900);
 }
 button:focus {
   outline: none;
@@ -103,22 +104,48 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  min-height: 27px;
 }
 .todo__form--input {
   caret-color: var(--primary);
-  font-size: var(--fs-400);
+  font-size: calc(var(--fs-300) + 1.8px);
   border: none;
 }
 .todo__form--input::placeholder {
   color: var(--neutral-700);
-  font-size: calc(var(--fs-300) - 3px);
+  font-size: calc(var(--fs-300) - 0.5px);
 }
 .todo__form--input:focus {
   outline: none;
 }
-
+.todo__form--button {
+  border-radius: var(--main-radius);
+  cursor: pointer;
+  border: 1px solid var(--neutral-900);
+  padding: 5px 10px;
+  background-origin: border-box;
+  position: relative;
+  color: transparent;
+  background-image: linear-gradient(to right bottom, var(--gradient));
+}
+.todo__form--button::before {
+  content: "add";
+  display: grid;
+  place-content: center;
+  position: absolute;
+  inset: 0px;
+  border-radius: 3.5px;
+  background-origin: inherit;
+  color: var(--neutral-900);
+  background: linear-gradient(to right bottom, var(--gradient));
+  color: white;
+}
+.todo__form--button:hover {
+  border-color: transparent;
+}
+.todo__form--button:hover::before {
+  background: white;
+  color: var(--neutral-900);
+}
 /* split */
 .todoes__wrapper {
   margin-block-start: 20px;
@@ -139,24 +166,79 @@ header {
 }
 .todoes__actions > * {
   color: var(--neutral-500);
+  cursor: pointer;
   transition: var(--transition);
 }
 .todoes__actions > *:hover {
   color: var(--neutral-900);
 }
-.todoes__actions--left,
+
 .todoes__actions--clear {
-  font-size: var(--fs-300);
+  font-size: calc(var(--fs-300) - 1.3px);
+}
+.todoes__actions--left {
+  font-size: calc(var(--fs-300) - 2px);
+  font-weight: 400;
 }
 /* split */
 .todoes__todo {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
-.todoes__todo--checkbox {
-  margin: 0;
-  border: 1pc solid red;
-}
+
 .todoes__todo--label {
+  font-size: var(--fs-300);
+  font-weight: 400;
+
   flex: 1;
+}
+input[type="checkbox"] {
+  appearance: none;
+  position: absolute;
+}
+input[type="checkbox"] + label {
+  --size: 20px;
+
+  position: relative;
+
+  width: var(--size);
+  height: var(--size);
+
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius);
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-origin: border-box;
+}
+input[type="checkbox"] + label::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 1px;
+  border-radius: var(--radius);
+}
+input[type="checkbox"] + label:hover {
+  background-image: linear-gradient(to right bottom, var(--gradient));
+}
+input[type="checkbox"]:checked + label {
+  background-image: url("./assets/icon-check.svg"),
+    linear-gradient(to right bottom, var(--gradient));
+}
+input[type="checkbox"]:checked ~ .todoes__todo--label {
+  text-decoration: line-through;
+  color: var(--neutral-500);
+}
+input[type="checkbox"]:checked + label::after {
+  background-color: transparent;
+}
+input[type="checkbox"] + label:hover::after {
+  background-color: white;
+}
+input[type="checkbox"]:checked + label:hover::after {
+  background-color: transparent;
+}
+input[type="checkbox"] ~ label {
+  cursor: pointer;
 }
