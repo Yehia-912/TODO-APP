@@ -1,22 +1,32 @@
-import { RxCross1 } from "react-icons/rx";
+import { RxCross1, RxPencil2 } from "react-icons/rx";
 
 import { ITodo } from "../interfaces";
+import { useState } from "react";
+import Modal from "./Modal";
+
+const ICONSTYLE = { color: "#494C6B", cursor: "pointer" };
+const ICONSIZE = 16;
 
 interface IProps {
   todo: ITodo;
   updateHandler: (id: string, newTodo: ITodo) => void;
+  deleteHandler: (id: string) => void;
 }
-const ICONSTYLE = { color: "#494C6B", cursor: "pointer" };
-const Todo = ({ todo, updateHandler }: IProps) => {
+
+const Todo = (props: IProps) => {
+  /*------------states--------------*/
+  const [isShown, setIsShown] = useState(false);
+  /*------------states--------------*/
+
+  /*------------Helpers--------------*/
+  const { todo, updateHandler, deleteHandler } = props;
   const { id, title, completed } = todo;
-  /*------------states--------------*/
+  /*------------Helpers--------------*/
 
-  /*------------states--------------*/
-
-  /*------------handle input:checkbox--------------*/
+  /*------------checkbox--------------*/
   const changeHandler = () =>
     updateHandler(id, { ...todo, completed: !completed });
-  /*------------handle input:checkbox--------------*/
+  /*------------checkbox--------------*/
 
   return (
     <>
@@ -32,8 +42,21 @@ const Todo = ({ todo, updateHandler }: IProps) => {
         <label htmlFor={`todo-${id}`} className="todoes__todo--label">
           {title}
         </label>
-        <RxCross1 style={ICONSTYLE} />
+
+        <div className="icons__wrapper">
+          <RxPencil2
+            style={ICONSTYLE}
+            size={ICONSIZE}
+            onClick={() => setIsShown(true)}
+          />
+          <RxCross1
+            style={ICONSTYLE}
+            size={ICONSIZE}
+            onClick={() => deleteHandler(id)}
+          />
+        </div>
       </li>
+      {isShown ? <Modal setIsShown={setIsShown} /> : null}
     </>
   );
 };

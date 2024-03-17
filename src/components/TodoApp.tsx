@@ -9,22 +9,29 @@ interface IProps {}
 const TodoApp = ({}: IProps) => {
   const [todoes, setTodoes] = useState<ITodo[]>(dummyTodoes);
 
-  /*------------handlers--------------*/
-  const updateHandler = (id: string, newTodo: ITodo) => {
-    const newTodoes = todoes.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, ...newTodo };
-      }
-      return todo;
-    });
-    setTodoes(newTodoes);
-  };
-  /*------------handlers--------------*/
+  /*------------Create--------------*/
+  const createHandler = (newTodo: ITodo) =>
+    setTodoes((prev) => [newTodo, ...prev]);
+  /*------------Create--------------*/
+
+  /*------------Update--------------*/
+  const updateHandler = (id: string, newTodo: ITodo) =>
+    setTodoes((prev) => prev.map((todo) => (todo.id == id ? newTodo : todo)));
+  /*------------Update--------------*/
+
+  /*------------Delete--------------*/
+  const deleteHandler = (id: string) =>
+    setTodoes((prev) => prev.filter((todo) => todo.id !== id));
+  /*------------Delete--------------*/
   return (
     <div className="todo__main--wrapper">
       <div className="wrapper">
-        <TodoForm />
-        <Todoes todoes={todoes} updateHandler={updateHandler} />
+        <TodoForm createHandler={createHandler} />
+        <Todoes
+          todoes={todoes}
+          updateHandler={updateHandler}
+          deleteHandler={deleteHandler}
+        />
       </div>
     </div>
   );

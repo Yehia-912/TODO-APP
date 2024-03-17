@@ -5,12 +5,18 @@ import { ITodo } from "../interfaces";
 interface IProps {
   todoes: ITodo[];
   updateHandler: (id: string, newTodo: ITodo) => void;
+  deleteHandler: (id: string) => void;
 }
 
-const Todoes = ({ todoes, updateHandler }: IProps) => {
+const Todoes = ({ todoes, updateHandler, deleteHandler }: IProps) => {
   /*------------render todoes--------------*/
   const renderTodoes = todoes.map((todo) => (
-    <Todo key={todo.id} updateHandler={updateHandler} todo={todo} />
+    <Todo
+      key={todo.id}
+      updateHandler={updateHandler}
+      deleteHandler={deleteHandler}
+      todo={todo}
+    />
   ));
   /*------------render todoes--------------*/
 
