@@ -20,12 +20,12 @@ const Todo = (props: IProps) => {
 
   /*------------Helpers--------------*/
   const { todo, updateHandler, deleteHandler } = props;
-  const { id, title, completed } = todo;
+
   /*------------Helpers--------------*/
 
   /*------------checkbox--------------*/
   const changeHandler = () =>
-    updateHandler(id, { ...todo, completed: !completed });
+    updateHandler(todo.id, { ...todo, completed: !todo.completed });
   /*------------checkbox--------------*/
 
   return (
@@ -33,14 +33,14 @@ const Todo = (props: IProps) => {
       <li className="todoes__todo">
         <input
           type="checkbox"
-          id={`todo-${id}`}
+          id={`todo-${todo.id}`}
           className="todoes__todo--checkbox"
-          checked={completed}
+          checked={todo.completed}
           onChange={changeHandler}
         />
-        <label htmlFor={`todo-${id}`}></label>
-        <label htmlFor={`todo-${id}`} className="todoes__todo--label">
-          {title}
+        <label htmlFor={`todo-${todo.id}`}></label>
+        <label htmlFor={`todo-${todo.id}`} className="todoes__todo--label">
+          {todo.title}
         </label>
 
         <div className="icons__wrapper">
@@ -52,11 +52,17 @@ const Todo = (props: IProps) => {
           <RxCross1
             style={ICONSTYLE}
             size={ICONSIZE}
-            onClick={() => deleteHandler(id)}
+            onClick={() => deleteHandler(todo.id)}
           />
         </div>
       </li>
-      {isShown ? <Modal setIsShown={setIsShown} /> : null}
+      {isShown ? (
+        <Modal
+          setIsShown={setIsShown}
+          updateHandler={updateHandler}
+          todo={todo}
+        />
+      ) : null}
     </>
   );
 };

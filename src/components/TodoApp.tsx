@@ -23,6 +23,13 @@ const TodoApp = ({}: IProps) => {
   const deleteHandler = (id: string) =>
     setTodoes((prev) => prev.filter((todo) => todo.id !== id));
   /*------------Delete--------------*/
+
+  /*------------clearComplete--------------*/
+  const clearCompleteHandler = () =>
+    setTodoes((prev) => prev.filter((todo) => !todo.completed));
+  /*------------clearComplete--------------*/
+
+  const todoesLen = todoes.length;
   return (
     <div className="todo__main--wrapper">
       <div className="wrapper">
@@ -31,6 +38,8 @@ const TodoApp = ({}: IProps) => {
           todoes={todoes}
           updateHandler={updateHandler}
           deleteHandler={deleteHandler}
+          clearCompleteHandler={clearCompleteHandler}
+          todoesLen={todoesLen}
         />
       </div>
     </div>

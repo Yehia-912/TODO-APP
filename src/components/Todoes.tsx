@@ -6,9 +6,17 @@ interface IProps {
   todoes: ITodo[];
   updateHandler: (id: string, newTodo: ITodo) => void;
   deleteHandler: (id: string) => void;
+  clearCompleteHandler: () => void;
+  todoesLen: number;
 }
 
-const Todoes = ({ todoes, updateHandler, deleteHandler }: IProps) => {
+const Todoes = ({
+  todoes,
+  updateHandler,
+  deleteHandler,
+  clearCompleteHandler,
+  todoesLen,
+}: IProps) => {
   /*------------render todoes--------------*/
   const renderTodoes = todoes.map((todo) => (
     <Todo
@@ -23,7 +31,10 @@ const Todoes = ({ todoes, updateHandler, deleteHandler }: IProps) => {
   return (
     <div className="todoes__wrapper">
       <ul className="todoes">{renderTodoes}</ul>
-      <TodoActions />
+      <TodoActions
+        todoesLen={todoesLen}
+        clearCompleteHandler={clearCompleteHandler}
+      />
     </div>
   );
 };

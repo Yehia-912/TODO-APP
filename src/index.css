@@ -69,7 +69,7 @@ button:focus {
 }
 .wrapper {
   padding-inline: 30px;
-  max-width: 960px;
+  max-width: 540px;
   margin-inline: auto;
 }
 /* header */
@@ -82,10 +82,16 @@ header {
   background: url("./assets/bg-mobile-light.jpg") no-repeat;
   background-size: cover;
 }
+@media (min-width: 540px) {
+  header {
+    background: url("./assets/bg-desktop-light.jpg") no-repeat;
+    background-size: cover;
+  }
+}
 .header__title {
   letter-spacing: 5px;
-  font-weight: var(--fw-bold);
-  font-size: var(--fs-900);
+  font-weight: var(--fw-normal);
+  font-size: xx-large;
 }
 .todo__header--wrapper {
   display: flex;
@@ -93,12 +99,10 @@ header {
 }
 /* split */
 .todo__main--wrapper {
-  /* position: relative;
-  top: -82px; */
-  /* transform: translateY(-82px); */
-  position: static ;
+  margin-block-start: -75px;
 }
 .todo__form {
+  --main-padding: 10px 15px 10px 25px;
   background-color: white;
   border-radius: var(--main-radius);
   box-shadow: var(--box-shadow);
@@ -153,7 +157,7 @@ header {
 }
 /* split */
 .todoes__wrapper {
-  margin-block-start: 20px;
+  margin-block-start: 15px;
   background-color: white;
   border-radius: var(--main-radius);
   box-shadow: var(--box-shadow);
@@ -261,7 +265,7 @@ input[type="checkbox"] ~ label {
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
   backdrop-filter: blur(3px);
   z-index: 100;
@@ -271,8 +275,6 @@ input[type="checkbox"] ~ label {
   inset: 0;
   display: grid;
   place-content: center;
-  z-index: 101;
-
 }
 .modal {
   box-shadow: 0 0 10px rgb(0, 0, 0, 0.25);

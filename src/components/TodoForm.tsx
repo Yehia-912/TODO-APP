@@ -10,6 +10,7 @@ const TodoForm = ({ createHandler }: IProps) => {
   /*------------Add todo--------------*/
   const addTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!title.trim()) return;
     const newTodo: ITodo = {
       id: String(Date.now()),
       title,

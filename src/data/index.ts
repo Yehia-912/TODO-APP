@@ -1,10 +1,10 @@
 import { ITodo } from "../interfaces";
 
-export const dummyTodoes:ITodo[] = [
+export const dummyTodoes: ITodo[] = [
   {
     id: "1",
-    title: "Complete online JavaScript course",
-    completed: true,
+    title: " JavaScript course",
+    completed: false,
   },
   {
     id: "2",

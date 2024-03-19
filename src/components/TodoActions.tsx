@@ -1,10 +1,15 @@
-interface IProps {}
-//eslint-disable-next-line
-const TodoActions = ({}: IProps) => {
+interface IProps {
+  clearCompleteHandler: () => void;
+  todoesLen: number;
+}
+
+const TodoActions = ({ clearCompleteHandler, todoesLen }: IProps) => {
   return (
     <div className="todoes__actions">
-      <span className="todoes__actions--left">5 items left</span>
-      <button className="todoes__actions--clear">Clear complete</button>
+      <span className="todoes__actions--left">{todoesLen} items left</span>
+      <button className="todoes__actions--clear" onClick={clearCompleteHandler}>
+        Clear complete
+      </button>
     </div>
   );
 };
